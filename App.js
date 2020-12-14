@@ -7,7 +7,7 @@ let  state = {
       bilim: "aefaefae"
     },
     {
-      sanat: "asdafae"
+      sanat: "asdafaesdgas"
     },
   ],
 };
