@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
 import React, { useState } from "react";
-import { View, Picker, StyleSheet, Button, TextInput, FlatList, onChange, ScrollView, Text } from "react-native";
+import { View, Picker, StyleSheet, Button, TextInput, FlatList, onChange, Text } from "react-native";
+import GoalItem from './component/GoalItem';
 
 export default App = () => {
   const [selectedValue, setSelectedValue] = useState("Seçiniz");
@@ -25,7 +26,8 @@ export default App = () => {
         <Picker
           selectedValue={selectedValue}
           style={styles.picker}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          onValueChange={(itemValue, itemIndex) => 
+          setSelectedValue(itemValue)}
         >
           <Picker.Item label="Konu Başlığı Seçiniz" value="Seçiniz"/>
           <Picker.Item label="Gündem" value="gündem"/>
@@ -37,24 +39,12 @@ export default App = () => {
           <Picker.Item label="Seyahat" value="seyahat"/>
         </Picker>
       </View>
-      <View>
-        <TextInput
-          placeholder="  Bir şeyler paylaş..."
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-          style={styles.textinput}/>   
-      </View>
-      <View style={styles.button}>
-        <Button title="Gönder" color="purple" onPress={addGoalHandler} />
-      </View>
+  
         <View style={styles.flatlist}>
             <FlatList 
              keyExtractor={(item, index) => item.id} 
              data={courseGoals} 
-             renderItem={itemData=>( 
-           <View>
-             <Text>{itemData.item.value}</Text> 
-           </View> )} />
+             renderItem={itemData=> <GoalItem title={itemData.item.value}/>} />
         
         </View>
 
@@ -72,34 +62,8 @@ const styles = StyleSheet.create({
       margin:10,
       padding:10
     },
-    button: {
-      padding: 10,
-      margin: 10,
-      justifyContent: 'flex-end',
-
-    },
-    textinput: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      width: 390,
-      height: 110,
-      borderColor: 'grey',
-      borderWidth: 5,
-      fontSize: 20,
-      fontStyle: 'normal',
-      backgroundColor: 'black',
-      padding:10,
-      
-    },
-    flatlist: {
-      backgroundColor: '#ccc',
-      alignItems: 'center',
-      marginVertical: 10,  
-      borderColor: 'black',
-      borderWidth: 1,
-      padding: 10,
-      paddingHorizontal: 10
-    }
+    
+    
 
 
 
